@@ -125,7 +125,7 @@ cd TugasBesar_DSP_122140048
 
 2. Create a virtual environment (recommended):
 Write this command via terminal VSCode. MKake sure you are in the right folder. 
-use uv environment and python 3.10 version.
+In this project, i use uv environment and python 3.10 version.
 - Install UV
 ```bash
 pip install uv
