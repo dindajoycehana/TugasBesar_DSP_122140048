@@ -1,4 +1,4 @@
-# TugasBesar DSP
+# Tugas Besar DSP
 Name     : Dinda Joycehana
 
 NIM      : 122140048
