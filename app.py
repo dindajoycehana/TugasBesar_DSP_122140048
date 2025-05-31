@@ -12,7 +12,7 @@ if st.button("📷 Open Camera and Start"):
     cap = cv2.VideoCapture(0)
     frame_window = st.image([])
     count = 0
-    while count < 100:
+    while count < 900:
         ret, frame = cap.read()
         if not ret:
             st.error("Failed to access webcam.")
