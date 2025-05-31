@@ -1,0 +1,24 @@
+# Digital Signal Processing Project Dependencies
+# Project: Respiration & rPPG System
+# Author: Dinda Joycehana (122140048)
+
+# Python version: 3.10
+# Jupyter Notebook (interactive signal analysis)
+notebook>=6.5.0
+jupyterlab>=3.6.0
+
+# Core scientific libraries
+numpy>=1.24.0
+scipy>=1.10.0
+pandas>=1.5.3
+
+# Visualization
+matplotlib>=3.7.0
+plotly>=5.13.0
+
+# Computer Vision & Signal Extraction
+opencv-python>=4.7.0.72
+mediapipe>=0.10.0
+
+# Web App Interface
+streamlit>=1.21.0
