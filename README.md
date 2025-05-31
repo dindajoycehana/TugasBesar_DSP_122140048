@@ -155,29 +155,27 @@ uv pip install -r requirements.txt
 
 4. Run Program
 You can run this project using **two different methods** depending on your needs:
+   1. Using Jupyter Notebook (`signal_processing.ipynb`)
+    - Make sure you have Jupyter installed:
+      ```bash
+      uv pip install notebook
+      ```
+    - Launch the notebook
+      ```bash
+      jupyter notebook
+      ```
+    - Open `signal_processing.ipynb` and run the cells in order.
 
-1. Using Jupyter Notebook (`signal_processing.ipynb`)
-- Make sure you have Jupyter installed:
-    ```bash
-    uv pip install notebook
-    ```
-- Launch the notebook
-    ```bash
-    jupyter notebook
-    ```
-- Open `signal_processing.ipynb` and run the cells in order.
-
-
-2. Using Streamlit App (app.py)
-- Make sure you have install streamlit from requirement.txt or you can run this command in terminal
-  ```bash
-  uv pip instal streamlit plotly
-  ```
-- Run the app
-  ```bash
-  streamlit run app.py
-  ```
-- Your browser will open automatically at: http://localhost:8501
+    2. Using Streamlit App (app.py)
+    - Make sure you have install streamlit from requirement.txt or you can run this command in terminal
+      ```bash
+      uv pip instal streamlit plotly
+      ```
+    - Run the app
+      ```bash
+      streamlit run app.py
+      ```  
+    - Your browser will open automatically at: http://localhost:8501
   
 ---
 
