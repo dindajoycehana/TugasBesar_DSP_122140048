@@ -35,6 +35,7 @@ Video is captured through a webcam and processed in real-time. The extracted sig
 ## 🛠️ Technologies Used
 
 - Python 3.10 or higher
+- Jupyter Notebook
 - `OpenCV` – Video capture & face detection  
 - `Mediapipe` – Pose estimation (for shoulder landmarks)  
 - `NumPy` – Numerical computing  
@@ -93,7 +94,7 @@ This project extracts physiological signals using computer vision and signal pro
   - Isolate physiological signal frequencies.
 - **Parameters:**
   - Respiration: 0.1 – 0.5 Hz
-  - rPPG: 0.7 – 4 Hz
+  - rPPG: 0.7 – 2.5 Hz
 
 ### 4. Visualization
 
