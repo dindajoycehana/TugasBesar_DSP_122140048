@@ -1,212 +1,182 @@
-# Tugas Besar DSP
+# 🧠 Real-Time Respiration and rPPG Signal Measurement - Final Project
 Name     : Dinda Joycehana
 
 NIM      : 122140048
 
-## Description Project
-This project implements a comprehensive system that combines respiration signal measurement and remote photoplethysmography (rPPG) processing. The system performs real-time analysis of physiological signals captured through webcam video input, providing visualization and analysis of both respiratory patterns and cardiovascular signals.
-
-This project provides two complementary applications for contactless physiological monitoring:
-
-- Standalone rPPG Monitor and Repiration Measurement (signal_processing.ipynb) complete analysis with POS algorithm
-- Streamlit Web App (app.py) - Interactive web interface with real-time filtering
+course   : Digital Signal Processing (DSP)   
 
 ---
 
-## Key Features
+## 📌 Project Overview
 
-- Real-time Video Processing: Captures and processes webcam input in real-time
-- Dual Signal Analysis:
-    - espiration signal measurement and analysis
-    - Remote photoplethysmography (rPPG) signal extraction
-- Signal Visualization: Real-time plotting and visualization using matplotlib
-- Digital Signal Processing: Advanced DSP techniques for signal filtering and analysis
-- User-friendly Interface: Intuitive display of both signal types simultaneously
+This project implements a real-time physiological signal measurement system that combines two key measurements:
+
+- ❤️ **Remote Photoplethysmography (rPPG):** Estimated from facial color changes within a bounding box obtained via face detection.
+- 🫁 **Respiration Signal:** Estimated from shoulder motion tracked using pose landmarks.
+
+Video is captured through a webcam and processed in real-time. The extracted signals are visualized using `Matplotlib`, and a lightweight web interface is built using `Streamlit`.
+
+📌 Disclaimer & Credits
+- The **pose estimation model** and **face detection implementation** used in this project are adapted from the materials and examples provided in the **Digital Signal Processing hands-on session** by the **Informatics Engineering Department**.
+- These models and base codes are credited to the original GitHub repository maintained by the **Informatics Engineering** instructors or assistants.
 
 ---
 
-# System Requirements
+## 🚀 Key Features
+
+- 📹 **Real-Time Webcam Input**
+- 🫀 **rPPG Signal Extraction:** Based on facial bounding box region (face detection).
+- 🫁 **Respiration Signal Extraction:** Based on shoulder landmark movement.
+- 🧽 **Signal Filtering:** Includes Butterworth and moving average filters for denoising.
+- 📊 **Live Signal Visualization:** Using `Matplotlib` embedded in a `Streamlit` interface.
+
+---
+
+## 🛠️ Technologies Used
 
 - Python 3.10 or higher
-- Webcam or video capture device
-- Minimum 4GB RAM recommended
-- Operating System: Windows, macOS, or Linux
+- `OpenCV` – Video capture & face detection  
+- `Mediapipe` – Pose estimation (for shoulder landmarks)  
+- `NumPy` – Numerical computing  
+- `SciPy` – Signal filtering  
+- `Matplotlib` – Signal visualization  
+- `Streamlit` – Simple web-based UI
 
 ---
 
-# Installation
+## 📁 Project Structure
+
+```bash
+TugasBesar_DSP_122140048/
+├── app.py                      # Main Streamlit app/Web UI signal
+├── signal_processing.ipynb     # Jupyter notebook for testing & analysis
+├── models/                     # Model or auxiliary data folder (if needed)
+├── requirement.txt             # Required Python libraries
+└── README.md                   # Project documentation
+```
+
+---
+## 🧠 Signal Processing Pipeline
+
+This project extracts physiological signals using computer vision and signal processing techniques. The steps are divided as follows:
+
+---
+
+### 1. rPPG Signal (❤️)
+
+- **Source:** Face skin region inside bounding box (detected using Haar Cascade or similar).
+- **Tool:** OpenCV + POS Algorithm
+- **Process:**
+  - Extract ROI (Region of Interest) from facial bounding box.
+  - Calculate average green channel intensity over time (rPPG sensitive to green).
+  - Use **Plane-Orthogonal-to-Skin (POS)** algorithm to enhance the pulse signal:
+    - Normalize color channels.
+    - Apply projection matrix to isolate pulse-related variations.
+  - Filter signal using a **bandpass filter (0.7–2.5 Hz)** for heart rate range.
+- **Output:** Real-time rPPG waveform with possible BPM estimation.
+
+### 2. Respiration Signal (🫁)
+
+- **Source:** Shoulder motion from pose landmarks (left and right shoulders).
+- **Tool:** Mediapipe Pose
+- **Process:**
+  - Track vertical movement (Y-axis) of both shoulders over time.
+  - Calculate displacement as a surrogate for breathing motion.
+  - Apply filtering (e.g., **bandpass filter 0.1–0.5 Hz**) to isolate the breathing frequency.
+- **Output:** Real-time respiration waveform plotted over time.
+
+### 3. Signal Filtering
+
+- **Type:** Butterworth Bandpass Filter (implemented using `scipy.signal`)
+- **Purpose:**
+  - Remove motion artifacts.
+  - Isolate physiological signal frequencies.
+- **Parameters:**
+  - Respiration: 0.1 – 0.5 Hz
+  - rPPG: 0.7 – 4 Hz
+
+### 4. Visualization
+
+- **Matplotlib:** Static and live plotting (in both notebook and Streamlit).
+- **Plotly:** Interactive signal plots in Jupyter Notebook.
+- **Streamlit:** Integrated plots + webcam feed.
+
+### 5. Models / Tools Used
+
+| Component              | Tool / Library       | Description                          |
+|------------------------|----------------------|--------------------------------------|
+| Pose Estimation        | Mediapipe Pose       | Landmark tracking for respiration    |
+| Face Detection         | OpenCV Haar Cascade  | Bounding box for rPPG extraction     |
+| Signal Filtering       | SciPy                | Butterworth bandpass filter          |
+| rPPG Algorithm         | POS (Plane Orthogonal to Skin) | Color projection technique     |
+| Visualization          | Matplotlib, Plotly   | Real-time and interactive plotting   |
+
+--- 
+
+## ▶️ How to Run the Program
+Follow these steps to run the project on your local machine:
 
 1. Clone the repository:
-bash
-
+```bash
 git clone https://github.com/dindajoycehana/TugasBesar_DSP_122140048.git
 cd TugasBesar_DSP_122140048
+```
 
 2. Create a virtual environment (recommended):
-
+Write this command via terminal VSCode. MKake sure you are in the right folder. 
+use uv environment and python 3.10 version.
 - Install UV
-
-bash
-
+```bash
 pip install uv
+```
 
-- Buat virtual environment
-
-bash
-
+- Create Virtual Environment
+```bash
 uv venv --python=python3.10
+```
 
-- Aktifkan Virtual Environment 
+- Virtual Environment Activate
 
 On Windows :
-
-bash
+```bash
 venv\Scripts\activate
+```
 
 On macOS/Linux :
-
+```bash
 source venv/bin/activate
+```
 
-
-Install required dependencies:
-
-bash
+3. Install required dependencies:
+```bash
 uv pip install -r requirements.txt
+```
 
+4. Run Program
+You can run this project using **two different methods** depending on your needs:
+
+1. Using Jupyter Notebook (`signal_processing.ipynb`)
+- Make sure you have Jupyter installed:
+    ```bash
+    uv pip install notebook
+    ```
+- Launch the notebook
+    ```bash
+    jupyter notebook
+    ```
+- Open `signal_processing.ipynb` and run the cells in order.
+
+
+2. Using Streamlit App (app.py)
+- Make sure you have install streamlit from requirement.txt or you can run this command in terminal
+  ```bash
+  uv pip instal streamlit plotly
+  ```
+- Run the app
+  ```bash
+  streamlit run app.py
+  ```
+- Your browser will open automatically at: http://localhost:8501
+  
 ---
 
-# Usage
-
-1. Standalone Application
-
-bash 
-
-python rppg_standalone.py
-
-Features:
-
-- 60-second automatic capture in 15 fps
-- Advanced POS algorithm for rPPG
-- Comprehensive signal analysis
-- Matplotlib visualizations
-- Press 'q' to quit early
-
-2. Interactive Web Application
-
-bash
-
-streamlite run app.py
-
-Features:
-
-- Real-time camera preview
-- Adjustable capture duration (10-120 seconds)
-- Interactive filter parameter adjustment
-- Live signal processing
-- Comparative raw vs filtered signal display
-
----
-
-# Dependencies
-The project relies on several key Python libraries:
-
-- MediaPipe for face detection and pose estimation
-- OpenCV: Computer vision and video processing
-- NumPy: Numerical computations and array operations
-- SciPy: Advanced signal processing functions
-- Matplotlib: Signal visualization and plotting
-- Streamlit : Interactive Web Interface
-
----
-
-🔧 Configuration Options
-Camera Settings
-
-Resolution: 640x480, 1280x720, 1920x1080
-Frame Rate: 15, 30, 60 FPS
-Capture Duration: 10-120 seconds (Streamlit only)
-
-Signal Processing Parameters
-rPPG (Heart Rate)
-
-Frequency Range: 0.7-4.0 Hz (42-240 BPM)
-Default Filter: 0.8-2.5 Hz (48-150 BPM)
-Algorithm: POS (Standalone) / Green Channel (Streamlit)
-
-Respiration
-
-Frequency Range: 0.1-0.4 Hz (6-24 breaths/min)
-Default Filter: 0.1-0.5 Hz
-Method: Shoulder landmark Y-position tracking
-
-📈 Signal Processing Pipeline
-1. Data Acquisition
-
-Face Detection: MediaPipe BlazeFace for ROI extraction
-Pose Detection: MediaPipe Pose for shoulder landmarks
-Signal Extraction: RGB channel analysis (face) + Y-position (shoulders)
-
-2. Signal Processing
-
-Preprocessing: Mean normalization and temporal windowing
-Filtering: Butterworth bandpass filters
-Peak Detection: Scipy find_peaks with adaptive thresholds
-
-3. Analysis & Visualization
-
-Rate Calculation: Peak interval analysis
-Quality Assessment: Signal-to-noise evaluation
-Real-time Display: Interactive plots with peak markers
-
-🎛️ Interactive Features (Streamlit App)
-Real-time Filter Adjustment
-
-Post-capture filtering: Modify parameters after data collection
-Immediate feedback: See changes instantly without re-capturing
-Parameter ranges:
-
-rPPG: 0.1-4.0 Hz
-Respiration: 0.05-1.0 Hz
-
-
-
-Visual Analysis
-
-Raw vs Filtered: Side-by-side signal comparison
-Peak Detection: Automatic heart/breath peak identification
-Statistics Display: Real-time rate calculations and data quality metrics
-
-💡 Best Practices
-For Optimal Results:
-
-Lighting: Ensure good, consistent lighting on face
-Positioning: Sit 50-80cm from camera, face directly forward
-Stability: Minimize movement during capture
-Duration: Capture for at least 30 seconds for reliable measurements
-Environment: Avoid flickering lights or strong shadows
-
-Troubleshooting:
-
-No face detected: Improve lighting, adjust camera angle
-Poor signal quality: Increase capture duration, reduce movement
-Incorrect readings: Adjust filter parameters in Streamlit app
-
-🔬 Technical Details
-Algorithms Used
-POS (Plane-Orthogonal-to-Skin) Method
-
-Advanced rPPG algorithm for robust heart rate detection
-Handles motion artifacts and lighting variations
-Operates on RGB color space projections
-
-Green Channel Method
-
-Simplified approach using green light absorption
-Real-time processing capability
-Good for controlled environments
-
-Signal Processing
-
-Butterworth Filters: 4th-order bandpass filtering
-Peak Detection: Adaptive threshold with minimum distance constraints
-Rate Calculation: Inter-beat interval analysis
