@@ -179,3 +179,12 @@ You can run this project using **two different methods** depending on your needs
   
 ---
 
+## Loogbook
+
+| Tanggal                | Pengerjaan           | Commit/Not Commit                          |
+|------------------------|----------------------|--------------------------------------|
+| 17 Mei 2025            | Setup environment, models, dan depedencies       | Commit    | 
+| 22 Mei 2025            | POS Fuction, initialize variabels   | Not Commit     |
+| 30 Mei 2025            | Respiration and rPPG Signal on Jupyter Notebook                | Commit          |
+| 31 Mei 2025            | Make UI signal representation | Commit     |
+| 31 Mei 2025            | Make final report, requirement.txt   | Commit   |
